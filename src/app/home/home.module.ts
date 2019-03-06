@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { TemperatureComponent } from '../components/temperature/temperature.component';
+import { WindInfoComponent } from '../components/wind-info/wind-info.component';
 
 @NgModule({
   imports: [
@@ -18,6 +20,10 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [
+    HomePage,
+    TemperatureComponent,
+    WindInfoComponent
+  ]
 })
 export class HomePageModule {}

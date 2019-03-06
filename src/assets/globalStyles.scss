@@ -1,0 +1,17 @@
+ion-card-title {
+  display: flex;
+  align-items: center;
+}
+
+.big-round-num {
+  font-size: 40px;
+  font-weight: bold;
+
+  ion-icon {
+    margin-right: 30px;
+  }
+
+  .degrees {
+    font-size: 30px;
+  }
+}

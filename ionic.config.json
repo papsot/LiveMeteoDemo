@@ -1,5 +1,7 @@
 {
   "name": "LiveMeteoDemo",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
