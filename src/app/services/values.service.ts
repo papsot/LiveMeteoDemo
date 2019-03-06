@@ -42,7 +42,7 @@ export class ValuesService {
     // }
   }
 
-  getWindSpeed() {
+  getWindSpeed(): Observable<IMeteoData> {
     const mockWindSpeedData: IMeteoData = {
       formattedValue: '2,2',
       rawValue: 2.193,
@@ -56,10 +56,10 @@ export class ValuesService {
     });
   }
 
-  getWindDirection() {
+  getWindDirection(): Observable<IMeteoData> {
     const mockWindDirectionData: IMeteoData = {
       formattedValue: '354,9',
-      rawValue: 354.9297,
+      rawValue: 124.9297,
       unitSymbol: '',
       method: ''
     };
@@ -70,7 +70,7 @@ export class ValuesService {
     });
   }
 
-  getRainfall() {
+  getRainfall(): Observable<IMeteoData> {
     const mockRainfallData: IMeteoData = {
       formattedValue: '0,0',
       rawValue: 0.0,
@@ -80,6 +80,20 @@ export class ValuesService {
 
     return Observable.create((observer) => {
       observer.next(mockRainfallData);
+      observer.complete();
+    });
+  }
+
+  getSolarIrradiance(): Observable<IMeteoData> {
+    const mockSolarData: IMeteoData = {
+      formattedValue: '483,9',
+      rawValue: 483.9017,
+      unitSymbol: '',
+      method: ''
+    };
+
+    return Observable.create((observer) => {
+      observer.next(mockSolarData);
       observer.complete();
     });
   }

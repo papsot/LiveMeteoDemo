@@ -10,6 +10,8 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <app-temperature [temperature]="temperature"></app-temperature>
-  <app-wind-info></app-wind-info>
+  <app-temperature [temperature]="temperature" [imageHref]="tempImage"></app-temperature>
+  <app-wind-info [windInfo]="windInfoObj"></app-wind-info>
+  <app-rainfall [rainfall]="raindfallAmount"></app-rainfall>
+  <app-solar-irradiance [irradiance]="solarIrradiance"></app-solar-irradiance>
 </ion-content>

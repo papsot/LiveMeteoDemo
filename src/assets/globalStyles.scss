@@ -1,3 +1,17 @@
+ion-card {
+  .ng-fa-icon {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 35px;
+    color: white;
+  }
+
+  img {
+    max-height: 220px;
+  }
+}
+
 ion-card-title {
   display: flex;
   align-items: center;
@@ -14,4 +28,8 @@ ion-card-title {
   .degrees {
     font-size: 30px;
   }
+}
+
+.text-small {
+  font-size: 15px;
 }

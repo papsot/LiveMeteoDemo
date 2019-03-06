@@ -5,14 +5,22 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+
+// ========= components ===========
 import { TemperatureComponent } from '../components/temperature/temperature.component';
 import { WindInfoComponent } from '../components/wind-info/wind-info.component';
+import { RainfallComponent } from '../components/rainfall/rainfall.component';
+import { SolarIrradianceComponent } from '../components/solar-irradiance/solar-irradiance.component';
+// =================================
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    FontAwesomeModule,
     RouterModule.forChild([
       {
         path: '',
@@ -23,7 +31,9 @@ import { WindInfoComponent } from '../components/wind-info/wind-info.component';
   declarations: [
     HomePage,
     TemperatureComponent,
-    WindInfoComponent
+    WindInfoComponent,
+    RainfallComponent,
+    SolarIrradianceComponent
   ]
 })
 export class HomePageModule {}

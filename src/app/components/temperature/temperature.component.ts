@@ -8,14 +8,11 @@ import { ValuesService } from 'src/app/services/values.service';
 })
 export class TemperatureComponent implements OnInit {
   @Input() temperature: string;
+  @Input() imageHref: string;
 
-  constructor(private valuesService: ValuesService) { }
+  constructor() { }
 
   ngOnInit() {
-    // this.valuesService.getTemperature().subscribe((data) => {
-    //   this.temperature = data.formattedValue;
-    //   console.log(data);
-    // });
   }
 
 }
