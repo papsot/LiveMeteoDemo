@@ -14,6 +14,8 @@ import { SolarIrradianceComponent } from '../components/solar-irradiance/solar-i
 // =================================
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { InfoModalPage } from '../modals/info-modal/info-modal.page';
+import { InfoModalPageModule } from '../modals/info-modal/info-modal.module';
 
 @NgModule({
   imports: [
@@ -30,10 +32,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   declarations: [
     HomePage,
+    InfoModalPage,
     TemperatureComponent,
     WindInfoComponent,
     RainfallComponent,
     SolarIrradianceComponent
-  ]
+  ],
+  entryComponents: [InfoModalPage]
 })
 export class HomePageModule {}

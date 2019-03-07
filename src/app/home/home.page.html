@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="secondary">
+      <ion-button (click)="presentModal()">
+        <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       Live Meteo
     </ion-title>
@@ -8,9 +13,9 @@
 
 <ion-content padding>
   <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
-    <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content pulling-text="Pull & release to refresh page"></ion-refresher-content>
   </ion-refresher>
-  <app-temperature [temperature]="temperature" [imageHref]="tempImage"></app-temperature>
+  <app-temperature [temperatureFormatted]="temperatureFormatted" [temperature]="temperatureValue"></app-temperature>
   <app-wind-info [windInfo]="windInfoObj"></app-wind-info>
   <app-rainfall [rainfall]="raindfallAmount"></app-rainfall>
   <app-solar-irradiance [irradiance]="solarIrradiance"></app-solar-irradiance>

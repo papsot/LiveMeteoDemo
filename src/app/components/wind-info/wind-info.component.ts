@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IWindInfo } from 'src/app/interfaces/IWindInfo';
-import { ImageService } from 'src/app/services/image.service';
-import { PhotoList } from 'src/app/helpers/photoList';
 
 @Component({
   selector: 'app-wind-info',
@@ -12,25 +10,22 @@ export class WindInfoComponent implements OnInit, OnChanges {
 
   @Input() windInfo: IWindInfo;
   windDirectionLiteral: string = '';
-  imageHref: string = '';
 
-  constructor(private imgService: ImageService) { }
+  constructor() { }
 
   ngOnInit() {}
 
 
   ngOnChanges(changes: SimpleChanges) {
-    this.convertWindDirection(changes['windInfo'].currentValue.windDirection);
-    this.getImage();
-  }
-
-  getImage() {
-    this.imgService.getPhoto(PhotoList.windy).then(
-      data => this.imageHref = data.urls.small
-    );
+    console.log(changes);
+    if (changes['windInfo'].currentValue) {
+      this.convertWindDirection(changes['windInfo'].currentValue.windDirection);
+      console.log(changes);
+    }
   }
 
   convertWindDirection(value: number) {
+    console.log(value);
     switch (true) {
       case (value >= 348.75): {
         this.windDirectionLiteral = 'North';

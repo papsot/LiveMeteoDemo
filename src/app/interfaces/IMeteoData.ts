@@ -4,3 +4,12 @@ export interface IMeteoData {
   unitSymbol: string;
   method: string;
 }
+
+export interface IMeteoDataResponse {
+  data: string;
+  headers: {
+    'set-cookie': string;
+  };
+  status: number;
+  url: string;
+}

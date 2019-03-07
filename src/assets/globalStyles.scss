@@ -1,14 +1,14 @@
 ion-card {
   .ng-fa-icon {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    font-size: 35px;
-    color: white;
+    padding-right: 10px;
   }
 
   img {
     max-height: 220px;
+  }
+
+  ion-card-title {
+    font-size: 25px;
   }
 }
 
@@ -32,4 +32,11 @@ ion-card-title {
 
 .text-small {
   font-size: 15px;
+}
+
+.info-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -22,7 +22,6 @@ export class ImageService {
   }
 
   getPhoto(id: string) {
-    console.log(id);
     return this.unsplash.photos.getPhoto(id).then(toJson);
   }
 }

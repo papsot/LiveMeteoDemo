@@ -1,100 +1,110 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { IMeteoData } from '../interfaces/IMeteoData';
+import { ENV } from '../interfaces/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValuesService {
 
-  constructor(private http: HTTP, private platform: Platform) { }
+  constructor(private http: HTTP, private platform: Platform, private httpClient: HttpClient) { }
 
-  getTemperature(): Observable<IMeteoData> {
 
-    const mockTemperatureData: IMeteoData = {
-      formattedValue: '14,4',
-      rawValue: 14.38697,
-      unitSymbol: '',
-      method: ''
-    };
+  getTemperature() {
+    if (ENV === 'dev') {
+      const temperature = Math.round(Math.random() * 40);
 
-    return Observable.create((observer) => {
-      observer.next(mockTemperatureData);
-      observer.complete();
-    });
+      const mockTemperatureData: IMeteoData = {
+        formattedValue: temperature.toString(),
+        rawValue: temperature,
+        unitSymbol: '',
+        method: ''
+      };
 
-    // if (this.platform.is('desktop')) {
-
-    //   // return new Observable();
-
-    //   return new Observable().of
-
-    //   // return Observable.create( observer => {
-    //   //   observer.next('hello');
-    //   //   observer.complete();
-    //   // });
-    //   // this.httpCLient.get('http://62.103.214.128:5555/values?node=202&units=metric&locale=el&startDate=latest');
-    // } else {
-    //   return this.http.get('http://62.103.214.128:5555/values?node=202&units=metric&locale=el&startDate=latest', {}, {});
-    // }
+      return Observable.create((observer) => {
+        observer.next(mockTemperatureData);
+        observer.complete();
+      });
+    } else {
+      return this.http.get('http://62.103.214.128:5555/values?node=202&units=metric&locale=el&startDate=latest', {}, {});
+    }
   }
 
-  getWindSpeed(): Observable<IMeteoData> {
-    const mockWindSpeedData: IMeteoData = {
-      formattedValue: '2,2',
-      rawValue: 2.193,
-      unitSymbol: '',
-      method: ''
-    };
+  getWindSpeed() {
+    if (ENV === 'dev') {
+      const mockWindSpeedData: IMeteoData = {
+        formattedValue: '2,2',
+        rawValue: 2.193,
+        unitSymbol: '',
+        method: ''
+      };
 
-    return Observable.create((observer) => {
-      observer.next(mockWindSpeedData);
-      observer.complete();
-    });
+      return Observable.create((observer) => {
+        observer.next(mockWindSpeedData);
+        observer.complete();
+      });
+    } else {
+      return this.http.get('http://62.103.214.128:5555/values?node=204&units=metric&locale=el&startDate=latest', {}, {});
+    }
+
   }
 
-  getWindDirection(): Observable<IMeteoData> {
-    const mockWindDirectionData: IMeteoData = {
-      formattedValue: '354,9',
-      rawValue: 124.9297,
-      unitSymbol: '',
-      method: ''
-    };
+  getWindDirection() {
+    if (ENV === 'dev') {
+      const mockWindDirectionData: IMeteoData = {
+        formattedValue: '354,9',
+        rawValue: 124.9297,
+        unitSymbol: '',
+        method: ''
+      };
 
-    return Observable.create((observer) => {
-      observer.next(mockWindDirectionData);
-      observer.complete();
-    });
+      return Observable.create((observer) => {
+        observer.next(mockWindDirectionData);
+        observer.complete();
+      });
+    } else {
+      return this.http.get('http://62.103.214.128:5555/values?node=200&units=metric&locale=el&startDate=latest', {}, {});
+    }
   }
 
-  getRainfall(): Observable<IMeteoData> {
-    const mockRainfallData: IMeteoData = {
-      formattedValue: '0,0',
-      rawValue: 0.0,
-      unitSymbol: '',
-      method: ''
-    };
+  getRainfall() {
+    if (ENV === 'dev') {
+      const mockRainfallData: IMeteoData = {
+        formattedValue: '0,0',
+        rawValue: 0.0,
+        unitSymbol: '',
+        method: ''
+      };
 
-    return Observable.create((observer) => {
-      observer.next(mockRainfallData);
-      observer.complete();
-    });
+      return Observable.create((observer) => {
+        observer.next(mockRainfallData);
+        observer.complete();
+      });
+    } else {
+      return this.http.get('http://62.103.214.128:5555/values?node=201&units=metric&locale=el&startDate=latest', {}, {});
+    }
+
   }
 
-  getSolarIrradiance(): Observable<IMeteoData> {
-    const mockSolarData: IMeteoData = {
-      formattedValue: '483,9',
-      rawValue: 483.9017,
-      unitSymbol: '',
-      method: ''
-    };
+  getSolarIrradiance() {
+    if (ENV === 'dev') {
+      const mockSolarData: IMeteoData = {
+        formattedValue: '483,9',
+        rawValue: 483.9017,
+        unitSymbol: '',
+        method: ''
+      };
 
-    return Observable.create((observer) => {
-      observer.next(mockSolarData);
-      observer.complete();
-    });
+      return Observable.create((observer) => {
+        observer.next(mockSolarData);
+        observer.complete();
+      });
+    } else {
+      return this.http.get('http://62.103.214.128:5555/values?node=199&units=metric&locale=el&startDate=latest', {}, {});
+    }
   }
 }

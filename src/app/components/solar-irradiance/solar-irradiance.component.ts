@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ImageService } from 'src/app/services/image.service';
-import { PhotoList } from 'src/app/helpers/photoList';
 
 @Component({
   selector: 'app-solar-irradiance',
@@ -9,18 +7,10 @@ import { PhotoList } from 'src/app/helpers/photoList';
 })
 export class SolarIrradianceComponent implements OnInit {
   @Input() irradiance: string;
-  imageHref: string = '';
 
-  constructor(private imgService: ImageService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getImage();
-  }
-
-  getImage() {
-    this.imgService.getPhoto(PhotoList.irradiance).then(
-      data => this.imageHref = data.urls.small
-    );
   }
 
 }
