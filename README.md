@@ -23,3 +23,18 @@ ionic serve
 ```
 
 this will spin up a development server and serve your app in localhost:8100
+
+
+## Android platform
+
+Add the android platform with the command:
+
+```
+ionic cordova platform add android
+```
+
+and build the android project with the command:
+
+```
+ionic cordova build android
+```
