@@ -15,8 +15,8 @@
   <ion-refresher slot="fixed" (ionRefresh)="refreshPage($event)">
     <ion-refresher-content pulling-text="Pull & release to refresh page"></ion-refresher-content>
   </ion-refresher>
-  <app-temperature [temperatureFormatted]="temperatureFormatted" [temperature]="temperatureValue"></app-temperature>
-  <app-wind-info [windInfo]="windInfoObj"></app-wind-info>
-  <app-rainfall [rainfall]="raindfallAmount"></app-rainfall>
-  <app-solar-irradiance [irradiance]="solarIrradiance"></app-solar-irradiance>
+  <app-temperature [temperatureFormatted]="temperatureFormatted" [temperature]="temperatureValue" [loading]="temperatureLoading"></app-temperature>
+  <app-wind-info [windInfo]="windInfoObj" [loading]="windLoading"></app-wind-info>
+  <app-rainfall [rainfall]="raindfallAmount" [loading]="rainfallLoading"></app-rainfall>
+  <app-solar-irradiance [irradiance]="solarIrradiance" [loading]="solarLoading"></app-solar-irradiance>
 </ion-content>

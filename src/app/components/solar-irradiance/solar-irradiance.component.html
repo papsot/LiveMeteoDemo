@@ -4,7 +4,11 @@
     <ion-card-title color="primary"><fa-icon icon="solar-panel"></fa-icon>Solar Irradiance</ion-card-title>
   </ion-card-header>
 
-  <ion-card-content class="big-round-num">
+  <ion-card-content class="big-round-num" *ngIf="irradiance && !loading">
     {{irradiance}} <span class="text-small">W/m<sup>2</sup></span>
+  </ion-card-content>
+
+  <ion-card-content class="big-round-num" *ngIf="loading">
+    <ion-spinner color="danger" name="dots"></ion-spinner>
   </ion-card-content>
 </ion-card>

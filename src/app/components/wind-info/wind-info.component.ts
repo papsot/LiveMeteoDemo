@@ -9,6 +9,7 @@ import { IWindInfo } from 'src/app/interfaces/IWindInfo';
 export class WindInfoComponent implements OnInit, OnChanges {
 
   @Input() windInfo: IWindInfo;
+  @Input() loading: boolean;
   windDirectionLiteral: string = '';
 
   constructor() { }
@@ -17,15 +18,14 @@ export class WindInfoComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-    if (changes['windInfo'].currentValue) {
-      this.convertWindDirection(changes['windInfo'].currentValue.windDirection);
-      console.log(changes);
+    if (changes['windInfo']) {
+      if (changes['windInfo'].currentValue.windDirection) {
+        this.convertWindDirection(changes['windInfo'].currentValue.windDirection);
+      }
     }
   }
 
   convertWindDirection(value: number) {
-    console.log(value);
     switch (true) {
       case (value >= 348.75): {
         this.windDirectionLiteral = 'North';
@@ -92,7 +92,7 @@ export class WindInfoComponent implements OnInit, OnChanges {
         break;
       }
       default: {
-        this.windDirectionLiteral = '';
+        this.windDirectionLiteral = 'error';
         break;
       }
     }

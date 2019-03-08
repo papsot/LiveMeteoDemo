@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ValuesService } from '../services/values.service';
 import { IWindInfo } from '../interfaces/IWindInfo';
 
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 import { ModalController } from '@ionic/angular';
 import { InfoModalPage } from '../modals/info-modal/info-modal.page';
 import { IMeteoDataResponse, IMeteoData } from '../interfaces/IMeteoData';
@@ -23,8 +25,14 @@ export class HomePage implements OnInit {
     windSpeed: ''
   };
 
+  temperatureLoading: boolean;
+  windLoading: boolean;
+  rainfallLoading: boolean;
+  solarLoading: boolean;
 
-  constructor(private valuesService: ValuesService, public modalController: ModalController) {
+
+  constructor(private valuesService: ValuesService, public modalController: ModalController, private deviceId: UniqueDeviceID) {
+    this.startLoaders();
   }
 
   async presentModal() {
@@ -35,16 +43,23 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    ENV === 'dev' ? this.getDevData() : this.getData();
-    // this.getData();
+    if (ENV) {
+      this.getDevData();
+    } else {
+      this.getData();
+      this.getDeviceId();
+    }
+
   }
 
   getData() {
     this.valuesService.getTemperature().then(
         (data: IMeteoDataResponse) => {
+          console.log(data);
           const formattedData: IMeteoData = JSON.parse(data.data);
           this.temperatureFormatted = formattedData.formattedValue;
           this.temperatureValue = formattedData.rawValue;
+          this.temperatureLoading = false;
         }
       );
 
@@ -52,7 +67,9 @@ export class HomePage implements OnInit {
         (data: IMeteoDataResponse) => {
           const formattedData: IMeteoData = JSON.parse(data.data);
           this.windInfoObj.windSpeed = formattedData.formattedValue;
-        }
+          this.windLoading = false;
+        },
+        error => console.log(error)
       );
 
     this.valuesService.getWindDirection().then(
@@ -66,6 +83,7 @@ export class HomePage implements OnInit {
       (data: IMeteoDataResponse) => {
         const formattedData: IMeteoData = JSON.parse(data.data);
         this.raindfallAmount = formattedData.formattedValue;
+        this.rainfallLoading = false;
       }
     );
 
@@ -73,6 +91,7 @@ export class HomePage implements OnInit {
       (data: IMeteoDataResponse) => {
         const formattedData: IMeteoData = JSON.parse(data.data);
         this.solarIrradiance = formattedData.formattedValue;
+        this.solarLoading = false;
       }
     );
   }
@@ -82,11 +101,15 @@ export class HomePage implements OnInit {
       data => {
         this.temperatureFormatted = data.formattedValue;
         this.temperatureValue = data.rawValue;
+        this.temperatureLoading = false;
       }
     );
 
     this.valuesService.getWindSpeed().subscribe(
-        data => this.windInfoObj.windSpeed = data.formattedValue
+        data => {
+          this.windInfoObj.windSpeed = data.formattedValue;
+          this.windLoading = false;
+        }
       );
 
     this.valuesService.getWindDirection().subscribe(
@@ -94,22 +117,53 @@ export class HomePage implements OnInit {
     );
 
     this.valuesService.getRainfall().subscribe(
-      data => this.raindfallAmount = data.formattedValue
+      data => {
+        this.raindfallAmount = data.formattedValue;
+        this.rainfallLoading = false;
+      }
     );
 
     this.valuesService.getSolarIrradiance().subscribe(
-      data => this.solarIrradiance = data.formattedValue
+      data => {
+        this.solarIrradiance = data.formattedValue;
+        this.solarLoading = false;
+      }
     );
   }
 
   refreshPage(event) {
-    // this.resetData();
+    this.resetData();
+    this.startLoaders();
     // this.getData();
     setTimeout(() => {
-      ENV === 'dev' ? this.getDevData() : this.getData();
+      ENV ? this.getDevData() : this.getData();
       event.target.complete();
-    }, 2800);
+    }, 800);
   }
+
+  startLoaders() {
+    this.temperatureLoading = true;
+    this.windLoading = true;
+    this.solarLoading = true;
+    this.rainfallLoading = true;
+  }
+
+  getDeviceId() {
+    this.deviceId.get().then(
+      data => this.sendDeviceId(data)
+    );
+  }
+
+  sendDeviceId(deviceId: string) {
+    this.valuesService.setUserDevice(deviceId).subscribe(
+      data => {
+        console.log(data);
+        console.log('success');
+      }
+    );
+  }
+
+
 
   resetData() {
     this.temperatureFormatted = '';

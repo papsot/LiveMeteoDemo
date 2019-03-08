@@ -13,9 +13,12 @@ export class ValuesService {
 
   constructor(private http: HTTP, private platform: Platform, private httpClient: HttpClient) { }
 
+  setUserDevice(deviceId: string) {
+    return this.httpClient.get(`http://webcreations.gr/meteo_live/Register/RegisterDevice.php?token=${deviceId}`);
+  }
 
   getTemperature() {
-    if (ENV === 'dev') {
+    if (ENV) {
       const temperature = Math.round(Math.random() * 40);
 
       const mockTemperatureData: IMeteoData = {
@@ -35,7 +38,7 @@ export class ValuesService {
   }
 
   getWindSpeed() {
-    if (ENV === 'dev') {
+    if (ENV) {
       const mockWindSpeedData: IMeteoData = {
         formattedValue: '2,2',
         rawValue: 2.193,
@@ -54,7 +57,7 @@ export class ValuesService {
   }
 
   getWindDirection() {
-    if (ENV === 'dev') {
+    if (ENV) {
       const mockWindDirectionData: IMeteoData = {
         formattedValue: '354,9',
         rawValue: 124.9297,
@@ -72,7 +75,7 @@ export class ValuesService {
   }
 
   getRainfall() {
-    if (ENV === 'dev') {
+    if (ENV) {
       const mockRainfallData: IMeteoData = {
         formattedValue: '0,0',
         rawValue: 0.0,
@@ -91,7 +94,7 @@ export class ValuesService {
   }
 
   getSolarIrradiance() {
-    if (ENV === 'dev') {
+    if (ENV) {
       const mockSolarData: IMeteoData = {
         formattedValue: '483,9',
         rawValue: 483.9017,

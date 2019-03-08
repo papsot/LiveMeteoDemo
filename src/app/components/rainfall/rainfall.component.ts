@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class RainfallComponent implements OnInit {
   @Input() rainfall: string;
+  @Input() loading: boolean;
 
   constructor() { }
 

@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SolarIrradianceComponent implements OnInit {
   @Input() irradiance: string;
+  @Input() loading: boolean;
 
   constructor() { }
 

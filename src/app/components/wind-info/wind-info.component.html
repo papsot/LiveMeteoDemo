@@ -5,10 +5,14 @@
     <ion-card-title color="primary"><fa-icon icon="wind"></fa-icon>Wind Info</ion-card-title>
   </ion-card-header>
 
-  <ion-card-content class="big-round-num">
+  <ion-card-content class="big-round-num" *ngIf="windInfo.windSpeed && !loading">
     {{windInfo.windSpeed}}
     <span class="text-small">
       {{windDirectionLiteral}}
     </span>
+  </ion-card-content>
+
+  <ion-card-content class="big-round-num" *ngIf="loading">
+    <ion-spinner color="danger" name="dots"></ion-spinner>
   </ion-card-content>
 </ion-card>

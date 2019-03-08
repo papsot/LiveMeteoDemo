@@ -8,6 +8,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 export class TemperatureComponent implements OnInit, OnChanges {
   @Input() temperatureFormatted: string;
   @Input() temperature: number;
+  @Input() loading: boolean;
 
   thermometerIcon: string = '';
 
