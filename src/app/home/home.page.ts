@@ -47,7 +47,7 @@ export class HomePage implements OnInit {
       this.getDevData();
     } else {
       this.getData();
-      this.getDeviceId();
+      // this.getDeviceId();
     }
 
   }
@@ -148,6 +148,8 @@ export class HomePage implements OnInit {
     this.rainfallLoading = true;
   }
 
+  // ******* NOT USED
+
   getDeviceId() {
     this.deviceId.get().then(
       data => this.sendDeviceId(data)
@@ -162,6 +164,7 @@ export class HomePage implements OnInit {
       }
     );
   }
+  // *****************
 
 
 
