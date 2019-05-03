@@ -7,6 +7,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 import { ValuesService } from './services/values.service';
 
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -17,7 +19,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private push: Push,
-    private valuesService: ValuesService
+    private valuesService: ValuesService,
+    private uniqueDeviceId: UniqueDeviceID
   ) {
     this.initializeApp();
   }
@@ -49,7 +52,7 @@ export class AppComponent {
 
     pushObject.on('registration').subscribe((registration: any) => {
       if (registration.registrationId) {
-        this.sendDeviceId(registration.registrationId);
+        this.getUID(registration.registrationId);
       }
       console.log('Device registered', registration);
     });
@@ -57,8 +60,18 @@ export class AppComponent {
     pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
   }
 
-  sendDeviceId(deviceId: string) {
-    this.valuesService.setUserDevice(deviceId).subscribe(
+
+  getUID(fcmToken: string) {
+    this.uniqueDeviceId.get().then(
+      (uuid: any) => {
+        this.sendDeviceId(uuid, fcmToken);
+      }
+    )
+    .catch(error => console.log(error));
+  }
+
+  sendDeviceId(deviceId: string, fcmToken: string) {
+    this.valuesService.setUserDevice(deviceId, fcmToken).subscribe(
       data => {
         console.log(data);
         console.log('success');

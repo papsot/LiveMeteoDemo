@@ -16,7 +16,9 @@
     <ion-refresher-content pulling-text="Pull & release to refresh page"></ion-refresher-content>
   </ion-refresher>
   <app-temperature [temperatureFormatted]="temperatureFormatted" [temperature]="temperatureValue" [loading]="temperatureLoading"></app-temperature>
-  <app-wind-info [windInfo]="windInfoObj" [loading]="windLoading"></app-wind-info>
+  <app-wind-info [windInfo]="windInfoObj" [windDirection]="windDirection" [loading]="windLoading"></app-wind-info>
   <app-rainfall [rainfall]="raindfallAmount" [loading]="rainfallLoading"></app-rainfall>
   <app-solar-irradiance [irradiance]="solarIrradiance" [loading]="solarLoading"></app-solar-irradiance>
+  <app-relative-humidity [relativeHumidity]="relativeHumidity" [loading]="relativeHumidityLoading"></app-relative-humidity>
+  <app-leaf-humidity [leafHumidity]="leafHumidity" [loading]="leafHumidityLoading"></app-leaf-humidity>
 </ion-content>

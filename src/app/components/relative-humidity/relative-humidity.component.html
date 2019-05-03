@@ -1,0 +1,14 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Current value of Relative Humidity</ion-card-subtitle>
+    <ion-card-title color="primary"><fa-icon icon="tint"></fa-icon>Relative Humidity</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content class="big-round-num" *ngIf="relativeHumidity && !loading">
+    {{relativeHumidity}} <span class="text-small">%</span>
+  </ion-card-content>
+
+  <ion-card-content class="big-round-num" *ngIf="loading">
+    <ion-spinner color="danger" name="dots"></ion-spinner>
+  </ion-card-content>
+</ion-card>

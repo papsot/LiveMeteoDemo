@@ -15,6 +15,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { Push } from '@ionic-native/push/ngx';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { Push } from '@ionic-native/push/ngx';
     StatusBar,
     SplashScreen,
     Push,
+    UniqueDeviceID,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

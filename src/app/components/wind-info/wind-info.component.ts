@@ -10,6 +10,7 @@ export class WindInfoComponent implements OnInit, OnChanges {
 
   @Input() windInfo: IWindInfo;
   @Input() loading: boolean;
+  @Input() windDirection: string;
   windDirectionLiteral: string = '';
 
   constructor() { }
@@ -18,14 +19,23 @@ export class WindInfoComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['windInfo']) {
-      if (changes['windInfo'].currentValue.windDirection) {
-        this.convertWindDirection(changes['windInfo'].currentValue.windDirection);
+    console.log(changes);
+    // if (changes['windInfo']) {
+    //   console.log(changes['windInfo']);
+    //   if (changes['windInfo'].currentValue.windDirection) {
+    //     this.convertWindDirection(changes['windInfo'].currentValue.windDirection);
+    //     console.log(this.windDirectionLiteral);
+    //   }
+    // }
+    if (changes['windDirection']) {
+      if (changes['windDirection'].currentValue) {
+        this.convertWindDirection(changes['windDirection'].currentValue);
       }
     }
   }
 
   convertWindDirection(value: number) {
+    console.log('switch here:', value);
     switch (true) {
       case (value >= 348.75): {
         this.windDirectionLiteral = 'North';
@@ -72,23 +82,23 @@ export class WindInfoComponent implements OnInit, OnChanges {
         break;
       }
       case (value >= 101.25): {
-        this.windDirectionLiteral = 'ESE';
+        this.windDirectionLiteral = 'East-SouthEast';
         break;
       }
       case (value >= 78.75): {
-        this.windDirectionLiteral = 'E';
+        this.windDirectionLiteral = 'East';
         break;
       }
       case (value >= 56.25): {
-        this.windDirectionLiteral = 'ENE';
+        this.windDirectionLiteral = 'East-NorthEast';
         break;
       }
       case (value >= 33.75): {
-        this.windDirectionLiteral = 'NE';
+        this.windDirectionLiteral = 'NorthEast';
         break;
       }
       case (value >= 11.25): {
-        this.windDirectionLiteral = 'NNE';
+        this.windDirectionLiteral = 'North-NorthEast';
         break;
       }
       default: {

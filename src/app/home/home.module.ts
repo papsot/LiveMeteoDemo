@@ -11,6 +11,8 @@ import { TemperatureComponent } from '../components/temperature/temperature.comp
 import { WindInfoComponent } from '../components/wind-info/wind-info.component';
 import { RainfallComponent } from '../components/rainfall/rainfall.component';
 import { SolarIrradianceComponent } from '../components/solar-irradiance/solar-irradiance.component';
+import { RelativeHumidityComponent } from '../components/relative-humidity/relative-humidity.component';
+import { LeafHumidityComponent } from '../components/leaf-humidity/leaf-humidity.component';
 // =================================
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -36,7 +38,9 @@ import { InfoModalPageModule } from '../modals/info-modal/info-modal.module';
     TemperatureComponent,
     WindInfoComponent,
     RainfallComponent,
-    SolarIrradianceComponent
+    SolarIrradianceComponent,
+    RelativeHumidityComponent,
+    LeafHumidityComponent
   ],
   entryComponents: [InfoModalPage]
 })

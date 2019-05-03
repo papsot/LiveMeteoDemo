@@ -13,9 +13,12 @@ export class ValuesService {
 
   constructor(private http: HTTP, private platform: Platform, private httpClient: HttpClient) { }
 
-  setUserDevice(deviceId: string) {
-    return this.httpClient.get(`http://webcreations.gr/meteo_live/Register/RegisterDevice.php?token=${deviceId}`);
+  setUserDevice(deviceId: string, fcmToken: string) {
+    return this.httpClient.get(`http://webcreations.gr/meteo_live/Register/RegisterDevice.php?token=${fcmToken}&deviceid=${deviceId}`);
   }
+
+
+  // http://webcreations.gr/meteo_live/Register/RegisterDevice.php?token="token"&deviceid="deviceid"
 
   getTemperature() {
     if (ENV) {
@@ -108,6 +111,42 @@ export class ValuesService {
       });
     } else {
       return this.http.get('http://62.103.214.128:5555/values?node=199&units=metric&locale=el&startDate=latest', {}, {});
+    }
+  }
+
+  getRelativeHumidity() {
+    if (ENV) {
+      const mockRelativeHumidityData: IMeteoData = {
+        formattedValue: '32.2',
+        rawValue: 32.234,
+        unitSymbol: '',
+        method: ''
+      };
+
+      return Observable.create((observer) => {
+        observer.next(mockRelativeHumidityData);
+        observer.complete();
+      });
+    } else {
+      return this.http.get('http://62.103.214.128:5555/values?node=198&units=metric&locale=el&startDate=latest', {}, {});
+    }
+  }
+
+  getLeafHumidity() {
+    if (ENV) {
+      const mockLeafHumidityData: IMeteoData = {
+        formattedValue: '30.1',
+        rawValue: 30.123,
+        unitSymbol: '',
+        method: ''
+      };
+
+      return Observable.create((observer) => {
+        observer.next(mockLeafHumidityData);
+        observer.complete();
+      });
+    } else {
+      return this.http.get('http://62.103.214.128:5555/values?node=196&units=metric&locale=el&startDate=latest', {}, {});
     }
   }
 }

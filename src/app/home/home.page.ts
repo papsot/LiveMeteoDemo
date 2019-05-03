@@ -25,10 +25,17 @@ export class HomePage implements OnInit {
     windSpeed: ''
   };
 
+  windDirection: number;
+
+  relativeHumidity: string = '';
+  leafHumidity: string = '';
+
   temperatureLoading: boolean;
   windLoading: boolean;
   rainfallLoading: boolean;
   solarLoading: boolean;
+  relativeHumidityLoading: boolean;
+  leafHumidityLoading: boolean;
 
 
   constructor(private valuesService: ValuesService, public modalController: ModalController, private deviceId: UniqueDeviceID) {
@@ -55,7 +62,6 @@ export class HomePage implements OnInit {
   getData() {
     this.valuesService.getTemperature().then(
         (data: IMeteoDataResponse) => {
-          console.log(data);
           const formattedData: IMeteoData = JSON.parse(data.data);
           this.temperatureFormatted = formattedData.formattedValue;
           this.temperatureValue = formattedData.rawValue;
@@ -75,7 +81,7 @@ export class HomePage implements OnInit {
     this.valuesService.getWindDirection().then(
       (data: IMeteoDataResponse) => {
         const formattedData: IMeteoData = JSON.parse(data.data);
-        this.windInfoObj.windDirection = formattedData.rawValue;
+        this.windDirection = formattedData.rawValue;
       }
     );
 
@@ -92,6 +98,22 @@ export class HomePage implements OnInit {
         const formattedData: IMeteoData = JSON.parse(data.data);
         this.solarIrradiance = formattedData.formattedValue;
         this.solarLoading = false;
+      }
+    );
+
+    this.valuesService.getRelativeHumidity().then(
+      (data: IMeteoDataResponse) => {
+        const formattedData: IMeteoData = JSON.parse(data.data);
+        this.relativeHumidity = formattedData.formattedValue;
+        this.relativeHumidityLoading = false;
+      }
+    );
+
+    this.valuesService.getLeafHumidity().then(
+      (data: IMeteoDataResponse) => {
+        const formattedData: IMeteoData = JSON.parse(data.data);
+        this.leafHumidity = formattedData.formattedValue;
+        this.leafHumidityLoading = false;
       }
     );
   }
@@ -113,7 +135,8 @@ export class HomePage implements OnInit {
       );
 
     this.valuesService.getWindDirection().subscribe(
-      data => this.windInfoObj.windDirection = data.rawValue
+      // data => this.windInfoObj.windDirection = data.rawValue
+      data => this.windDirection = data.rawValue
     );
 
     this.valuesService.getRainfall().subscribe(
@@ -127,6 +150,20 @@ export class HomePage implements OnInit {
       data => {
         this.solarIrradiance = data.formattedValue;
         this.solarLoading = false;
+      }
+    );
+
+    this.valuesService.getRelativeHumidity().subscribe(
+      data => {
+        this.relativeHumidity = data.formattedValue;
+        this.relativeHumidityLoading = false;
+      }
+    );
+
+    this.valuesService.getLeafHumidity().subscribe(
+      data => {
+        this.leafHumidity = data.formattedValue;
+        this.leafHumidityLoading = false;
       }
     );
   }
@@ -146,24 +183,26 @@ export class HomePage implements OnInit {
     this.windLoading = true;
     this.solarLoading = true;
     this.rainfallLoading = true;
+    this.relativeHumidityLoading = true;
+    this.leafHumidityLoading = true;
   }
 
   // ******* NOT USED
 
-  getDeviceId() {
-    this.deviceId.get().then(
-      data => this.sendDeviceId(data)
-    );
-  }
+  // getDeviceId() {
+  //   this.deviceId.get().then(
+  //     data => this.sendDeviceId(data)
+  //   );
+  // }
 
-  sendDeviceId(deviceId: string) {
-    this.valuesService.setUserDevice(deviceId).subscribe(
-      data => {
-        console.log(data);
-        console.log('success');
-      }
-    );
-  }
+  // sendDeviceId(deviceId: string) {
+  //   this.valuesService.setUserDevice(deviceId).subscribe(
+  //     data => {
+  //       console.log(data);
+  //       console.log('success');
+  //     }
+  //   );
+  // }
   // *****************
 
 
@@ -177,5 +216,8 @@ export class HomePage implements OnInit {
       windDirection: null,
       windSpeed: ''
     };
+    this.windDirection = null;
+    this.relativeHumidity = '';
+    this.leafHumidity = '';
   }
 }
